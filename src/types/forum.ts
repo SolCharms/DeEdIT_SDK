@@ -42,16 +42,16 @@ export type Forum = {
           "type": "u8"
         },
         {
-          "name": "forumProfileFee",
-          "type": "u64"
+          "name": "forumFees",
+          "type": {
+            "defined": "ForumFees"
+          }
         },
         {
-          "name": "forumQuestionFee",
-          "type": "u64"
-        },
-        {
-          "name": "forumQuestionBountyMinimum",
-          "type": "u64"
+          "name": "reputationMatrix",
+          "type": {
+            "defined": "ReputationMatrix"
+          }
         }
       ]
     },
@@ -76,16 +76,16 @@ export type Forum = {
       ],
       "args": [
         {
-          "name": "newForumProfileFee",
-          "type": "u64"
+          "name": "newForumFees",
+          "type": {
+            "defined": "ForumFees"
+          }
         },
         {
-          "name": "newForumQuestionFee",
-          "type": "u64"
-        },
-        {
-          "name": "newForumQuestionBountyMinimum",
-          "type": "u64"
+          "name": "newReputationMatrix",
+          "type": {
+            "defined": "ReputationMatrix"
+          }
         }
       ]
     },
@@ -278,6 +278,197 @@ export type Forum = {
       ]
     },
     {
+      "name": "createAboutMe",
+      "accounts": [
+        {
+          "name": "forum",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "profileOwner",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "userProfile",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "aboutMe",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "bumpUserProfile",
+          "type": "u8"
+        },
+        {
+          "name": "content",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "editAboutMe",
+      "accounts": [
+        {
+          "name": "profileOwner",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "userProfile",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "aboutMe",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "bumpUserProfile",
+          "type": "u8"
+        },
+        {
+          "name": "bumpAboutMe",
+          "type": "u8"
+        },
+        {
+          "name": "newContent",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "deleteAboutMe",
+      "accounts": [
+        {
+          "name": "profileOwner",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "userProfile",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "aboutMe",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "receiver",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "bumpUserProfile",
+          "type": "u8"
+        },
+        {
+          "name": "bumpAboutMe",
+          "type": "u8"
+        }
+      ]
+    },
+    {
+      "name": "addModerator",
+      "accounts": [
+        {
+          "name": "forum",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "forumManager",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "profileOwner",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "userProfile",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "bumpUserProfile",
+          "type": "u8"
+        }
+      ]
+    },
+    {
+      "name": "removeModerator",
+      "accounts": [
+        {
+          "name": "forum",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "forumManager",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "profileOwner",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "userProfile",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "bumpUserProfile",
+          "type": "u8"
+        }
+      ]
+    },
+    {
       "name": "askQuestion",
       "accounts": [
         {
@@ -308,6 +499,11 @@ export type Forum = {
         {
           "name": "questionSeed",
           "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "bountyPda",
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -344,9 +540,259 @@ export type Forum = {
           "type": "u64"
         }
       ]
+    },
+    {
+      "name": "addContentToQuestion",
+      "accounts": [
+        {
+          "name": "forum",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "profileOwner",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "userProfile",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "question",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "questionSeed",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "bumpUserProfile",
+          "type": "u8"
+        },
+        {
+          "name": "bumpQuestion",
+          "type": "u8"
+        },
+        {
+          "name": "newContent",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "editQuestion",
+      "accounts": [
+        {
+          "name": "forum",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "profileOwner",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "userProfile",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "question",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "questionSeed",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "bumpUserProfile",
+          "type": "u8"
+        },
+        {
+          "name": "bumpQuestion",
+          "type": "u8"
+        },
+        {
+          "name": "newTitle",
+          "type": "string"
+        },
+        {
+          "name": "newContent",
+          "type": "string"
+        },
+        {
+          "name": "newTags",
+          "type": {
+            "defined": "Tags"
+          }
+        }
+      ]
+    },
+    {
+      "name": "deleteQuestion",
+      "accounts": [
+        {
+          "name": "forum",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "moderator",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "moderatorProfile",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "profileOwner",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "userProfile",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "question",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "questionSeed",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "receiver",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "bumpModeratorProfile",
+          "type": "u8"
+        },
+        {
+          "name": "bumpUserProfile",
+          "type": "u8"
+        },
+        {
+          "name": "bumpQuestion",
+          "type": "u8"
+        }
+      ]
     }
   ],
   "accounts": [
+    {
+      "name": "aboutMe",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "userProfile",
+            "type": "publicKey"
+          },
+          {
+            "name": "aboutMeCreatedTs",
+            "type": "u64"
+          },
+          {
+            "name": "mostRecentUpdateTs",
+            "type": "u64"
+          },
+          {
+            "name": "content",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "name": "bigNote",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "forum",
+            "type": "publicKey"
+          },
+          {
+            "name": "userProfile",
+            "type": "publicKey"
+          },
+          {
+            "name": "bigNoteSeed",
+            "type": "publicKey"
+          },
+          {
+            "name": "bigNoteCreatedTs",
+            "type": "u64"
+          },
+          {
+            "name": "mostRecentUpdateTs",
+            "type": "u64"
+          },
+          {
+            "name": "bountyAmount",
+            "type": "u64"
+          },
+          {
+            "name": "solicitingContibutors",
+            "type": "bool"
+          },
+          {
+            "name": "tag",
+            "type": {
+              "defined": "Tags"
+            }
+          },
+          {
+            "name": "title",
+            "type": "string"
+          },
+          {
+            "name": "content",
+            "type": "string"
+          },
+          {
+            "name": "bountyAwarded",
+            "type": "bool"
+          }
+        ]
+      }
+    },
     {
       "name": "forum",
       "type": {
@@ -382,32 +828,22 @@ export type Forum = {
             "type": "publicKey"
           },
           {
-            "name": "forumProfileFee",
-            "type": "u64"
+            "name": "forumFees",
+            "type": {
+              "defined": "ForumFees"
+            }
           },
           {
-            "name": "forumQuestionFee",
-            "type": "u64"
+            "name": "forumCounts",
+            "type": {
+              "defined": "ForumCounts"
+            }
           },
           {
-            "name": "forumQuestionBountyMinimum",
-            "type": "u64"
-          },
-          {
-            "name": "forumProfileCount",
-            "type": "u64"
-          },
-          {
-            "name": "forumQuestionCount",
-            "type": "u64"
-          },
-          {
-            "name": "forumAnswerCount",
-            "type": "u64"
-          },
-          {
-            "name": "forumCommentCount",
-            "type": "u64"
+            "name": "reputationMatrix",
+            "type": {
+              "defined": "ReputationMatrix"
+            }
           }
         ]
       }
@@ -417,6 +853,10 @@ export type Forum = {
       "type": {
         "kind": "struct",
         "fields": [
+          {
+            "name": "forum",
+            "type": "publicKey"
+          },
           {
             "name": "userProfile",
             "type": "publicKey"
@@ -476,6 +916,14 @@ export type Forum = {
             "type": "u64"
           },
           {
+            "name": "bigNotesPosted",
+            "type": "u64"
+          },
+          {
+            "name": "bigNotesContributions",
+            "type": "u64"
+          },
+          {
             "name": "questionsAsked",
             "type": "u64"
           },
@@ -500,8 +948,25 @@ export type Forum = {
             "type": "u64"
           },
           {
+            "name": "extraReputationSpace",
+            "type": {
+              "array": [
+                "u8",
+                64
+              ]
+            }
+          },
+          {
             "name": "nftPfpTokenMint",
             "type": "publicKey"
+          },
+          {
+            "name": "hasAboutMe",
+            "type": "bool"
+          },
+          {
+            "name": "hasHadAboutMe",
+            "type": "bool"
           },
           {
             "name": "isModerator",
@@ -512,6 +977,125 @@ export type Forum = {
     }
   ],
   "types": [
+    {
+      "name": "ForumCounts",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "forumProfileCount",
+            "type": "u64"
+          },
+          {
+            "name": "forumBigNotesCount",
+            "type": "u64"
+          },
+          {
+            "name": "forumQuestionCount",
+            "type": "u64"
+          },
+          {
+            "name": "forumAnswerCount",
+            "type": "u64"
+          },
+          {
+            "name": "forumCommentCount",
+            "type": "u64"
+          },
+          {
+            "name": "extraSpace",
+            "type": {
+              "array": [
+                "u8",
+                64
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "ForumFees",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "forumProfileFee",
+            "type": "u64"
+          },
+          {
+            "name": "forumQuestionFee",
+            "type": "u64"
+          },
+          {
+            "name": "forumBigNotesFee",
+            "type": "u64"
+          },
+          {
+            "name": "forumQuestionBountyMinimum",
+            "type": "u64"
+          },
+          {
+            "name": "forumBigNotesBountyMinimum",
+            "type": "u64"
+          },
+          {
+            "name": "extraSpace",
+            "type": {
+              "array": [
+                "u8",
+                64
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "ReputationMatrix",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "aboutMeRep",
+            "type": "u64"
+          },
+          {
+            "name": "postBigNotesRep",
+            "type": "u64"
+          },
+          {
+            "name": "contributeBigNotesRep",
+            "type": "u64"
+          },
+          {
+            "name": "questionRep",
+            "type": "u64"
+          },
+          {
+            "name": "answerRep",
+            "type": "u64"
+          },
+          {
+            "name": "commentRep",
+            "type": "u64"
+          },
+          {
+            "name": "acceptedAnswerRep",
+            "type": "u64"
+          },
+          {
+            "name": "extraSpace",
+            "type": {
+              "array": [
+                "u8",
+                64
+              ]
+            }
+          }
+        ]
+      }
+    },
     {
       "name": "Tags",
       "type": {
@@ -597,16 +1181,16 @@ export const IDL: Forum = {
           "type": "u8"
         },
         {
-          "name": "forumProfileFee",
-          "type": "u64"
+          "name": "forumFees",
+          "type": {
+            "defined": "ForumFees"
+          }
         },
         {
-          "name": "forumQuestionFee",
-          "type": "u64"
-        },
-        {
-          "name": "forumQuestionBountyMinimum",
-          "type": "u64"
+          "name": "reputationMatrix",
+          "type": {
+            "defined": "ReputationMatrix"
+          }
         }
       ]
     },
@@ -631,16 +1215,16 @@ export const IDL: Forum = {
       ],
       "args": [
         {
-          "name": "newForumProfileFee",
-          "type": "u64"
+          "name": "newForumFees",
+          "type": {
+            "defined": "ForumFees"
+          }
         },
         {
-          "name": "newForumQuestionFee",
-          "type": "u64"
-        },
-        {
-          "name": "newForumQuestionBountyMinimum",
-          "type": "u64"
+          "name": "newReputationMatrix",
+          "type": {
+            "defined": "ReputationMatrix"
+          }
         }
       ]
     },
@@ -833,6 +1417,197 @@ export const IDL: Forum = {
       ]
     },
     {
+      "name": "createAboutMe",
+      "accounts": [
+        {
+          "name": "forum",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "profileOwner",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "userProfile",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "aboutMe",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "bumpUserProfile",
+          "type": "u8"
+        },
+        {
+          "name": "content",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "editAboutMe",
+      "accounts": [
+        {
+          "name": "profileOwner",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "userProfile",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "aboutMe",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "bumpUserProfile",
+          "type": "u8"
+        },
+        {
+          "name": "bumpAboutMe",
+          "type": "u8"
+        },
+        {
+          "name": "newContent",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "deleteAboutMe",
+      "accounts": [
+        {
+          "name": "profileOwner",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "userProfile",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "aboutMe",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "receiver",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "bumpUserProfile",
+          "type": "u8"
+        },
+        {
+          "name": "bumpAboutMe",
+          "type": "u8"
+        }
+      ]
+    },
+    {
+      "name": "addModerator",
+      "accounts": [
+        {
+          "name": "forum",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "forumManager",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "profileOwner",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "userProfile",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "bumpUserProfile",
+          "type": "u8"
+        }
+      ]
+    },
+    {
+      "name": "removeModerator",
+      "accounts": [
+        {
+          "name": "forum",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "forumManager",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "profileOwner",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "userProfile",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "bumpUserProfile",
+          "type": "u8"
+        }
+      ]
+    },
+    {
       "name": "askQuestion",
       "accounts": [
         {
@@ -863,6 +1638,11 @@ export const IDL: Forum = {
         {
           "name": "questionSeed",
           "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "bountyPda",
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -899,9 +1679,259 @@ export const IDL: Forum = {
           "type": "u64"
         }
       ]
+    },
+    {
+      "name": "addContentToQuestion",
+      "accounts": [
+        {
+          "name": "forum",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "profileOwner",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "userProfile",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "question",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "questionSeed",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "bumpUserProfile",
+          "type": "u8"
+        },
+        {
+          "name": "bumpQuestion",
+          "type": "u8"
+        },
+        {
+          "name": "newContent",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "editQuestion",
+      "accounts": [
+        {
+          "name": "forum",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "profileOwner",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "userProfile",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "question",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "questionSeed",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "bumpUserProfile",
+          "type": "u8"
+        },
+        {
+          "name": "bumpQuestion",
+          "type": "u8"
+        },
+        {
+          "name": "newTitle",
+          "type": "string"
+        },
+        {
+          "name": "newContent",
+          "type": "string"
+        },
+        {
+          "name": "newTags",
+          "type": {
+            "defined": "Tags"
+          }
+        }
+      ]
+    },
+    {
+      "name": "deleteQuestion",
+      "accounts": [
+        {
+          "name": "forum",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "moderator",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "moderatorProfile",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "profileOwner",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "userProfile",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "question",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "questionSeed",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "receiver",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "bumpModeratorProfile",
+          "type": "u8"
+        },
+        {
+          "name": "bumpUserProfile",
+          "type": "u8"
+        },
+        {
+          "name": "bumpQuestion",
+          "type": "u8"
+        }
+      ]
     }
   ],
   "accounts": [
+    {
+      "name": "aboutMe",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "userProfile",
+            "type": "publicKey"
+          },
+          {
+            "name": "aboutMeCreatedTs",
+            "type": "u64"
+          },
+          {
+            "name": "mostRecentUpdateTs",
+            "type": "u64"
+          },
+          {
+            "name": "content",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "name": "bigNote",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "forum",
+            "type": "publicKey"
+          },
+          {
+            "name": "userProfile",
+            "type": "publicKey"
+          },
+          {
+            "name": "bigNoteSeed",
+            "type": "publicKey"
+          },
+          {
+            "name": "bigNoteCreatedTs",
+            "type": "u64"
+          },
+          {
+            "name": "mostRecentUpdateTs",
+            "type": "u64"
+          },
+          {
+            "name": "bountyAmount",
+            "type": "u64"
+          },
+          {
+            "name": "solicitingContibutors",
+            "type": "bool"
+          },
+          {
+            "name": "tag",
+            "type": {
+              "defined": "Tags"
+            }
+          },
+          {
+            "name": "title",
+            "type": "string"
+          },
+          {
+            "name": "content",
+            "type": "string"
+          },
+          {
+            "name": "bountyAwarded",
+            "type": "bool"
+          }
+        ]
+      }
+    },
     {
       "name": "forum",
       "type": {
@@ -937,32 +1967,22 @@ export const IDL: Forum = {
             "type": "publicKey"
           },
           {
-            "name": "forumProfileFee",
-            "type": "u64"
+            "name": "forumFees",
+            "type": {
+              "defined": "ForumFees"
+            }
           },
           {
-            "name": "forumQuestionFee",
-            "type": "u64"
+            "name": "forumCounts",
+            "type": {
+              "defined": "ForumCounts"
+            }
           },
           {
-            "name": "forumQuestionBountyMinimum",
-            "type": "u64"
-          },
-          {
-            "name": "forumProfileCount",
-            "type": "u64"
-          },
-          {
-            "name": "forumQuestionCount",
-            "type": "u64"
-          },
-          {
-            "name": "forumAnswerCount",
-            "type": "u64"
-          },
-          {
-            "name": "forumCommentCount",
-            "type": "u64"
+            "name": "reputationMatrix",
+            "type": {
+              "defined": "ReputationMatrix"
+            }
           }
         ]
       }
@@ -972,6 +1992,10 @@ export const IDL: Forum = {
       "type": {
         "kind": "struct",
         "fields": [
+          {
+            "name": "forum",
+            "type": "publicKey"
+          },
           {
             "name": "userProfile",
             "type": "publicKey"
@@ -1031,6 +2055,14 @@ export const IDL: Forum = {
             "type": "u64"
           },
           {
+            "name": "bigNotesPosted",
+            "type": "u64"
+          },
+          {
+            "name": "bigNotesContributions",
+            "type": "u64"
+          },
+          {
             "name": "questionsAsked",
             "type": "u64"
           },
@@ -1055,8 +2087,25 @@ export const IDL: Forum = {
             "type": "u64"
           },
           {
+            "name": "extraReputationSpace",
+            "type": {
+              "array": [
+                "u8",
+                64
+              ]
+            }
+          },
+          {
             "name": "nftPfpTokenMint",
             "type": "publicKey"
+          },
+          {
+            "name": "hasAboutMe",
+            "type": "bool"
+          },
+          {
+            "name": "hasHadAboutMe",
+            "type": "bool"
           },
           {
             "name": "isModerator",
@@ -1067,6 +2116,125 @@ export const IDL: Forum = {
     }
   ],
   "types": [
+    {
+      "name": "ForumCounts",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "forumProfileCount",
+            "type": "u64"
+          },
+          {
+            "name": "forumBigNotesCount",
+            "type": "u64"
+          },
+          {
+            "name": "forumQuestionCount",
+            "type": "u64"
+          },
+          {
+            "name": "forumAnswerCount",
+            "type": "u64"
+          },
+          {
+            "name": "forumCommentCount",
+            "type": "u64"
+          },
+          {
+            "name": "extraSpace",
+            "type": {
+              "array": [
+                "u8",
+                64
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "ForumFees",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "forumProfileFee",
+            "type": "u64"
+          },
+          {
+            "name": "forumQuestionFee",
+            "type": "u64"
+          },
+          {
+            "name": "forumBigNotesFee",
+            "type": "u64"
+          },
+          {
+            "name": "forumQuestionBountyMinimum",
+            "type": "u64"
+          },
+          {
+            "name": "forumBigNotesBountyMinimum",
+            "type": "u64"
+          },
+          {
+            "name": "extraSpace",
+            "type": {
+              "array": [
+                "u8",
+                64
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "ReputationMatrix",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "aboutMeRep",
+            "type": "u64"
+          },
+          {
+            "name": "postBigNotesRep",
+            "type": "u64"
+          },
+          {
+            "name": "contributeBigNotesRep",
+            "type": "u64"
+          },
+          {
+            "name": "questionRep",
+            "type": "u64"
+          },
+          {
+            "name": "answerRep",
+            "type": "u64"
+          },
+          {
+            "name": "commentRep",
+            "type": "u64"
+          },
+          {
+            "name": "acceptedAnswerRep",
+            "type": "u64"
+          },
+          {
+            "name": "extraSpace",
+            "type": {
+              "array": [
+                "u8",
+                64
+              ]
+            }
+          }
+        ]
+      }
+    },
     {
       "name": "Tags",
       "type": {

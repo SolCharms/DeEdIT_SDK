@@ -15,16 +15,30 @@ export const findForumTreasuryPDA = async (forum: PublicKey) => {
     );
 };
 
-export const findUserProfilePDA = async (profile_owner: PublicKey) => {
+export const findUserProfilePDA = async (profileOwner: PublicKey) => {
     return PublicKey.findProgramAddressSync(
-        [Buffer.from('user_profile'), profile_owner.toBytes()],
+        [Buffer.from('user_profile'), profileOwner.toBytes()],
         FORUM_PROG_ID
     );
 };
 
-export const findQuestionPDA = async (forum: PublicKey, user_profile: PublicKey, question_seed: PublicKey) => {
+export const findAboutMePDA = async (userProfile: PublicKey) => {
     return PublicKey.findProgramAddressSync(
-        [Buffer.from('question'), forum.toBytes(), user_profile.toBytes(), question_seed.toBytes()],
+        [Buffer.from('about_me'), userProfile.toBytes()],
+        FORUM_PROG_ID
+    );
+};
+
+export const findQuestionPDA = async (forum: PublicKey, userProfile: PublicKey, questionSeed: PublicKey) => {
+    return PublicKey.findProgramAddressSync(
+        [Buffer.from('question'), forum.toBytes(), userProfile.toBytes(), questionSeed.toBytes()],
+        FORUM_PROG_ID
+    );
+};
+
+export const findBountyPDA = async (question: PublicKey) => {
+    return PublicKey.findProgramAddressSync(
+        [Buffer.from('bounty_pda'), question.toBytes()],
         FORUM_PROG_ID
     );
 };
