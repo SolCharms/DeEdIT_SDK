@@ -8,7 +8,7 @@ This README is intended to cater to experienced developers with a focus on proto
 
 March 13 2023:
 
-The project, codenamed xAndria is un-audited open-source software. It was built from the ground up by a single developer over a 30 day period (Feb 14 2023 - March 13 2023) for submission in Solana's Grizzlython hackathon. Any use of this software is done so at your own risk and the developer induces zero liabilty in doing so. (Edit: Indeed, see the Program Improvements / Debugging section at the end of this readme to grasp how much was learned just in the process of this demonstration).
+The project, codenamed xAndria is un-audited open-source software. It was built from the ground up by a single developer over a 30 day period (Feb 14 2023 - March 13 2023) for submission in Solana's Grizzlython hackathon. Any use of this software is done so at your own risk and the developer induces zero liabilty in doing so. (Edit: Indeed, see the Program Improvements / Debugging section at the end of this readme to grasp how much was learned just in the process of this demonstration and how much is left to do to have a fully 'fleshed-out' product).
 
 Furthermore, any speculative positions in this demo are purely hypothetical and intended for use as educational tools only. They are not to be construed as having any financial relevance whatsoever, nor insight into the financial markets, nor financial advice.
 
@@ -122,23 +122,23 @@ Running the command
 
 the output to the terminal should appear as something like 
 
-![Screenshot from 2023-03-13 22-28-43](https://user-images.githubusercontent.com/97003046/224877290-06b10d97-bc42-4646-9ae4-50f938aa6e08.png)
+![Screenshot from 2023-03-14 01-05-22](https://user-images.githubusercontent.com/97003046/224898780-4806119b-7a53-4ba7-b9bf-89f6ed5955f0.png)
 
 We can fetch the user profile by running the command
 
-    forum-cli fetch-profile-by-key -k CnvMMVHfenQXNWrdDpHrqVEj7dYz6PvmLwsd9HDMLAyt
+    forum-cli fetch-profile-by-key -k FNdJSvCWraqKrELHFdvaHuQHqKNCYKLw1JbbKNdBDHPA
 
 which displays the user profile state account to the terminal as something like
 
-![Screenshot from 2023-03-13 22-31-34](https://user-images.githubusercontent.com/97003046/224877706-523177a7-40e1-4ae6-8a33-b055e832edcf.png)
+![Screenshot from 2023-03-14 01-06-52](https://user-images.githubusercontent.com/97003046/224899211-c7bc15b7-b421-4a5b-a3c7-488834b046ff.png)
 
 Fetching the forum account, we see that there is now 1 forum profile account present:
 
-![Screenshot from 2023-03-13 22-58-32](https://user-images.githubusercontent.com/97003046/224881631-54a7d434-7998-4f2a-b3cf-922fd33aa61f.png)
+![Screenshot from 2023-03-14 01-08-12](https://user-images.githubusercontent.com/97003046/224899679-0feb98df-65ae-4a17-9139-588255ed2703.png)
 
 The next step after a user's profile has been created is to create an 'about me'. This first requires configuring the file (../config_devnet/aboutMeConfig-devnet.ts) to add the necessary about me text
 
-![Screenshot from 2023-03-13 22-46-05](https://user-images.githubusercontent.com/97003046/224879868-27667c3e-d1d4-45b7-a2c0-8eea7024992e.png)
+![Screenshot from 2023-03-14 01-09-39](https://user-images.githubusercontent.com/97003046/224900169-90315480-421b-4d88-9926-b5fdf067200b.png)
 
 and then by running the command
 
@@ -146,21 +146,21 @@ and then by running the command
 
 obtaining an output similar to
 
-![Screenshot from 2023-03-13 22-57-07](https://user-images.githubusercontent.com/97003046/224881401-11b66491-6ac9-4079-b0a5-e7ec6fc0799a.png)
+![Screenshot from 2023-03-14 01-10-32](https://user-images.githubusercontent.com/97003046/224900477-04ee15f7-5c8a-4721-bc29-caa97f2c6dee.png)
 
 Fetching the user profile
 
-![Screenshot from 2023-03-13 23-02-23](https://user-images.githubusercontent.com/97003046/224882181-971ceea8-12b3-4007-97ff-91c684ced398.png)
+![Screenshot from 2023-03-14 01-11-19](https://user-images.githubusercontent.com/97003046/224900698-9a291078-7a5b-4309-8003-57764aa7fada.png)
 
 we now see that the user profile has an about me and has earned 100 reputation!
 
 We can also view the about me state account by running the command
 
-    forum-cli fetch-about-me-by-profile -p CnvMMVHfenQXNWrdDpHrqVEj7dYz6PvmLwsd9HDMLAyt
+    forum-cli fetch-about-me-by-profile -p FNdJSvCWraqKrELHFdvaHuQHqKNCYKLw1JbbKNdBDHPA
 
 which displays the following output to the terminal
 
-![Screenshot from 2023-03-13 23-06-10](https://user-images.githubusercontent.com/97003046/224882710-4a9c85bb-fae7-49c8-a388-4938f3a7e7f0.png)
+![Screenshot from 2023-03-14 01-12-26](https://user-images.githubusercontent.com/97003046/224901086-cb85b6d0-98d8-4bc4-abde-cc98373d0838.png)
 
 To edit the about me, change the content in the config file and execute
 
@@ -168,25 +168,99 @@ To edit the about me, change the content in the config file and execute
 
 A successful transaction outputs
 
-![Screenshot from 2023-03-13 23-43-03](https://user-images.githubusercontent.com/97003046/224887739-a5a17f67-46d9-453e-9f0c-a52f4f0a5785.png)
+![Screenshot from 2023-03-14 01-13-45](https://user-images.githubusercontent.com/97003046/224901506-bda215a6-55c4-4cce-a0c2-d2a31387ee4f.png)
 
 and the about me account is updated to reflect the changes
 
-![Screenshot from 2023-03-13 23-44-13](https://user-images.githubusercontent.com/97003046/224887946-fd635fc3-3cdd-4819-9704-4f5a12b5df53.png)
+![Screenshot from 2023-03-14 01-14-26](https://user-images.githubusercontent.com/97003046/224901690-c5b9235c-5ae9-4dfa-b795-2ad9f983069c.png)
 
-I'll go ahead and create the remaining user profiles.
+I'll later create the remaining user profiles, as necessary.
 
-## Asking a Question
+## Asking a Question, Providing an Answer, or Leaving a Comment
 
-To ask a question on the forum, we must first configure the question config file (../config_devnet/questionConfig-devnet.ts)
+To ask a question on the forum, we must first configure the question config file (../config_devnet/questionConfig-devnet.ts). I've gone ahead and grabbed a question off of solana stack exchange as an homage to the inspiriation for xAndria. Here's what the config looks like:
 
+![Screenshot from 2023-03-14 01-16-55](https://user-images.githubusercontent.com/97003046/224902442-c94ff9b9-7d8a-44d0-a0b1-ac4b88f29706.png)
 
+The front end app will have the ability to pick up newline characters, code block delimiters and even latex math equations. 
 
+Running the command
 
+    forum-cli ask-question
 
+the output to the terminal upon a successful transaction is something of the form
 
+![Screenshot from 2023-03-14 02-19-51](https://user-images.githubusercontent.com/97003046/224912966-a3acb145-ef00-4a60-be94-2bda3e510616.png)
 
+We can fetch the question either by fetching all questions for a given user profile or by the question account's pubkey. Here, running
 
+    forum-cli fetch-question-by-key -k 8SMeMaXARPZDJHyBtoPiZiGXW89c731UjKAgqyUdgiLi
+
+the question state account displays to the terminal as
+
+![Screenshot from 2023-03-14 02-20-53](https://user-images.githubusercontent.com/97003046/224913155-23d2fb0e-0e22-4a3c-9289-790a59dda7bb.png)
+
+Fetching the forum account again, 
+
+![Screenshot from 2023-03-14 01-19-48](https://user-images.githubusercontent.com/97003046/224903427-465ed16f-4027-4941-8458-3d65b0c0e200.png)
+
+we see that there is now 1 question in the count.
+
+We can then edit or add additional content to the question. Showing the addition of content, we first update the config file inputting the additional content to the 
+
+    const additionalQuestionContent: string[]
+
+Running the command 
+
+    forum-cli add-to-question -q 8SMeMaXARPZDJHyBtoPiZiGXW89c731UjKAgqyUdgiLi
+
+the output gives
+
+![Screenshot from 2023-03-14 02-23-16](https://user-images.githubusercontent.com/97003046/224913577-27ba184f-9f6b-4a80-b29f-8e1a8e2dad1e.png)
+
+and the updated question state account
+
+![Screenshot from 2023-03-14 02-24-14](https://user-images.githubusercontent.com/97003046/224913751-e7061245-7568-46f6-bbd0-e4ce9a2b8c65.png)
+
+reflects the additional desired content.
+
+Now, another user may come along and take interest your question. Being also particularly interested in knowing the answer, the user may choose to supplement the question bounty to help drive up engagement. Running
+
+    forum-cli supplement-question-bounty -q 8SMeMaXARPZDJHyBtoPiZiGXW89c731UjKAgqyUdgiLi -x 1000000000
+
+The output to the terminal appears as
+
+![Screenshot from 2023-03-14 02-27-21](https://user-images.githubusercontent.com/97003046/224914397-5789f4ba-1b98-4e92-95ec-ceca6fde912a.png)
+
+and the question account's state
+
+![Screenshot from 2023-03-14 02-28-26](https://user-images.githubusercontent.com/97003046/224914616-683bd71c-394b-4877-8e5c-df8975a32486.png)
+
+reflects the supplemental bounty contribution. 
+
+REMARK: An improtant comment to make in passing is that this bounty is held onchain in a PDA account and can only be released to the owner of the user profile who provided the 'accepted answer'.
+
+Providing an answer or leaving a comment goes much the same way as asking a question does; by first updating the config file, either (../config_devnet/answerConfig-devnet.ts) or (../config_devnet/commentConfig-devnet.ts). Here is an example for an answer config file for a user intending to answer the question posted earlier:
+
+![Screenshot from 2023-03-14 02-58-31](https://user-images.githubusercontent.com/97003046/224920446-9975ced4-3112-4104-846a-5ff4c31a5791.png)
+
+Running
+
+    forum-cli answer-question
+
+we get an output for a successful transaction as
+
+![Screenshot from 2023-03-14 03-00-00](https://user-images.githubusercontent.com/97003046/224920752-ea5ade26-218d-492c-b2c6-46465c6299c1.png)
+
+and the answer state account can be fetched by running
+
+    forum-cli fetch-answer-by-key -k 23vTfWpPgGzXrhCmHPDD8A7sBsDgNY9AD95p8H9W16zQ
+    
+which gives
+
+![Screenshot from 2023-03-14 03-10-19](https://user-images.githubusercontent.com/97003046/224922941-fa2d37b5-9897-4960-bcad-18f5ec4a6f96.png)
+
+I'll go ahead and post some comments and edits to the answer without going through all of the details, but to give you an idea of what a typical stack would look like. 
 
 
 
@@ -211,7 +285,10 @@ To ask a question on the forum, we must first configure the question config file
 
 ## Program Improvements / Debugging
 
-1. Combine Delete User Profile and Delete About Me into one instruction. Creating them separately was done to incentivize a user's first action on the protocol and to give the user a first taste at gaining some reputation. Deleting them does not have to be done subsequently. 
+1. Create an instruction that runs Delete User Profile and Delete About Me in one call (either onchain or in the CLI). Creating them separately was done to incentivize a user's first action on the protocol and to give the user a first taste at gaining some reputation. Deleting them does not have to be done subsequently, although the functionality to delete them separately is necessary (in the case that a user has no 'about me' for example). 
 
+2. Implement a way to reclaim bounties from PDAs for questions that have been inactive for extremely long periods of time. 
+
+3. Moderator privileges still need to be implemented. This includes editing questions, answers, comments, and big notes pages. 
 
 
