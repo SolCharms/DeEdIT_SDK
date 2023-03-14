@@ -260,18 +260,27 @@ which gives
 
 ![Screenshot from 2023-03-14 03-10-19](https://user-images.githubusercontent.com/97003046/224922941-fa2d37b5-9897-4960-bcad-18f5ec4a6f96.png)
 
-I'll go ahead and post some comments and edits to the answer without going through all of the details, but to give you an idea of what a typical stack would look like. 
+I'll go ahead and post some comments and edits to the answer without going through all of the details, but to give you an idea of what a typical stack would look like, here is the following series of interactions following the posted question:
 
+![Screenshot from 2023-03-14 07-12-31](https://user-images.githubusercontent.com/97003046/224983946-e361e1b0-0930-4c89-9e22-4d6fdb2d5ac9.png)
 
+Obviously, a front-end application with nice graphical interfaces will present the relevent data to the user in a much more appealing way, but that's neither here nor there. To accept an answer, the poster of the question can run the command
 
+    forum-cli accept-answer -q 8SMeMaXARPZDJHyBtoPiZiGXW89c731UjKAgqyUdgiLi -a 23vTfWpPgGzXrhCmHPDD8A7sBsDgNY9AD95p8H9W16zQ
 
+and upon doing so we see that both the question and the accepted answer have been updated to reflect this fact
 
+![Screenshot from 2023-03-14 18-22-14](https://user-images.githubusercontent.com/97003046/225155470-fc9c744d-6626-4040-ad0c-56bfdae57ac0.png)
 
+The bounty is transferred to the account owner of the user profile which posted the accepted answer. Here is the transaction signature:
 
+    txSig: 3Jk1yoSDXHWTvFQAnBQi4zWHQaBdYo4MN4A2Ue4at9FRQgaFbv97xZRYcWVtGR2bRtoBSdQbcBj7sgLGhuKsGZyd
 
+Note the slight discrepancy for +◎2.49994432 rather than +◎2.5, which was due to a small bug which miscalculated the rent-exemption Lamports (as these are returned to the account owner of the user profile which posted the question.) This bug has now been fixed (by instead transfering the 2.5 first and returning the remaining Lamports while closing the PDA thereafter), although the tutorial is too far along to begin anew. 
 
+## Interacting with The Library (creating BigNotes, soliciting BigNotes Contributions, etc..)
 
-
+Coming Soon.
 
 
 
@@ -287,8 +296,8 @@ I'll go ahead and post some comments and edits to the answer without going throu
 
 1. Create an instruction that runs Delete User Profile and Delete About Me in one call (either onchain or in the CLI). Creating them separately was done to incentivize a user's first action on the protocol and to give the user a first taste at gaining some reputation. Deleting them does not have to be done subsequently, although the functionality to delete them separately is necessary (in the case that a user has no 'about me' for example). 
 
-2. Implement a way to reclaim bounties from PDAs for questions that have been inactive for extremely long periods of time. 
+2. Implement a way to reclaim bounties from PDAs for questions that have been inactive for extremely long periods of time. This is not necessary right away and metrics will be put in place to monitor app engagement, thereby creating a statistically advantageous cut-off point.
 
-3. Moderator privileges still need to be implemented. This includes editing questions, answers, comments, and big notes pages. 
+3. Moderator privileges still need to be implemented. This includes giving moderators the ability to edit questions, answers, comments, and big notes pages. 
 
 
