@@ -9,3 +9,4 @@ target/CACHEDIR.TAG
 target/.rustc_info.json
 **/*.rs.bk
 node_modules
+.yarn
